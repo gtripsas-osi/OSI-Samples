@@ -333,6 +333,13 @@ jsonMultipleValues = ocsClient.Streams.getRangeValues(tenantId, namespaceId, sam
 foundEvents = ocsClient.mGson.fromJson(jsonMultipleValues, listType);   
 ```
 
+Get sampled values:
+
+```java
+jsonMultipleValues = ocsClient.Streams.getSampledValues(tenantId, namespaceId, sampleStreamId, "0", "40", 4, "Sin");
+foundEvents = ocsClient.mGson.fromJson(jsonMultipleValues, listType);
+```
+
 Updating and Replacing Values
 -----------------------------
 
