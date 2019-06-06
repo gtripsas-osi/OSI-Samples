@@ -171,7 +171,7 @@ public class Program {
             dumpEvents(foundEvents);
             System.out.println();
             
-            //tring tenantId, String namespaceId, String streamId, String startIndex, String endIndex, int skip, int count, boolean reverse, SdsBoundaryType boundaryType) throws SdsError {
+            //String tenantId, String namespaceId, String streamId, String startIndex, String endIndex, int skip, int count, boolean reverse, SdsBoundaryType boundaryType) throws SdsError {
        
             String retrievedInterpolated = ocsClient.Streams.getRangeValuesInterpolated(tenantId, namespaceId, sampleStreamId, "5", "32",4);
       
@@ -191,10 +191,11 @@ public class Program {
             //We will retrieve a sample of our data
             System.out.println("SDS can return a sample of your data population to show trends.");
             System.out.println("Getting Sampled Values:");
-            jsonMultipleValues = ocsClient.Streams.GetSampledValues(tenantId, namespaceId, sampleStream, "0", "40", 4, "Sin");
+            jsonMultipleValues = ocsClient.Streams.getSampledValues(tenantId, namespaceId, sampleStreamId, "0", "40", 4, "Sin");
             foundEvents = ocsClient.mGson.fromJson(jsonMultipleValues, listType);
             dumpEvents(foundEvents);
             System.out.println();
+
             // Step 12
             // Property Overrides
             System.out.println("Property Overrides");

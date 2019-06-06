@@ -930,15 +930,15 @@ public class StreamsClient {
 
     /**
      * gets sampled values from the stream
-     * @param tenantId
-     * @param namespaceId
-     * @param streamId
-     * @param startIndex
-     * @param endIndex
-     * @param intervals
-     * @param sampleBy
+     * @param tenantId tenant to work under
+     * @param namespaceId namespace within tenant
+     * @param streamId name of stream to get data from
+     * @param startIndex starting index
+     * @param endIndex ending index
+     * @param intervals number of intervals to run sample
+     * @param sampleBy property to sample by
      * @return
-     * @throws SdsError
+     * @throws SdsError errors that may occur
      */
     public String getSampledValues(String tenantId, String namespaceId, String streamId, String startIndex, String endIndex, int intervals, String sampleBy){
         URL url = null;
@@ -946,7 +946,7 @@ public class StreamsClient {
         String inputLine;
         StringBuffer response = new StringBuffer();
         try{
-            url = new URL(baseUrl + getSampledValuesQuery.replace("{tenantId}", tenantId).replace("{namespaceId}", namespaceId)
+            url = new URL(baseUrl + getSampledValuesQuery.replace("{apiVersion}", apiVersion).replace("{tenantId}", tenantId).replace("{namespaceId}", namespaceId)
             .replace("{streamId}", streamId).replace("{startIndex}", startIndex).replace("{endIndex}", endIndex)
             .replace("{intervals}", "" + intervals).replace("{sampleBy}", sampleBy));
             urlConnection = baseClient.getConnection(url, "GET");
@@ -966,13 +966,13 @@ public class StreamsClient {
             }
             BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
-            while(inputLine = in.readLine() != null){
+            while((inputLine = in.readLine()) != null){
                 response.append(inputLine);
             }
             in.close();
         } catch (SdsError sdsError) {
             sdsError.print();
-            throw sdsError;
+            //throw sdsError;
         } catch (Exception e) {
             e.printStackTrace();
         }

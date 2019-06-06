@@ -52,7 +52,7 @@ public class WaveData {
         // long milliSec = cal.getTimeInMillis() * 60;
         // int intervalInMilliSec = interval * 60 * 1000;
         //double radians = (((double) milliSec % intervalInMilliSec) / intervalInMilliSec) * 2 * Math.PI;
-        double radians = order * (Math.Pi / 32);
+        double radians = order * (Math.PI / 32);
 
         return new WaveData(multiplier, radians, order);
     }
