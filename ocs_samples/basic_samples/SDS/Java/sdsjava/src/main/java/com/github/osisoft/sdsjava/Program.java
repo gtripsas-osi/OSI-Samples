@@ -187,7 +187,7 @@ public class Program {
             dumpEvents(foundEvents);
             System.out.println();
             
-            //Step 11.1
+            //Step 11
             //We will retrieve a sample of our data
             System.out.println("SDS can return a sample of your data population to show trends.");
             System.out.println("Getting Sampled Values:");
@@ -195,7 +195,7 @@ public class Program {
             foundEvents = ocsClient.mGson.fromJson(jsonMultipleValues, listType);
             dumpEvents(foundEvents);
             System.out.println();
-            // Step 11
+            // Step 12
             // Property Overrides
             System.out.println("Property Overrides");
             System.out.println(
@@ -240,7 +240,7 @@ public class Program {
             }
             System.out.println();
 
-            // Step 12
+            // Step 13
             // SdsStreamViews
             System.out.println("SdsStreamViews");
             System.out.println("Here is some of our data as it is stored on the server:");
@@ -345,7 +345,7 @@ public class Program {
             dumpSdsStreamViewMap(streamViewMap);
             System.out.println();
             
-            // Step 13
+            // Step 14
             System.out.println("We will now update the stream type based on the streamview");
             
             String firstVal = ocsClient.Streams.getFirstValue(tenantId, namespaceId, sampleStreamId);
@@ -359,7 +359,7 @@ public class Program {
             System.out.println("The new type id" + newStream.getTypeId() + " compared to the original one " + sampleStream.getTypeId());
             System.out.println("The new type value " + firstVal + " compared to the original one " + newStreamString);
             
-            // Step 14 
+            // Step 15 
 
             String types = ocsClient.Types.getTypes(tenantId, namespaceId, 0, 100);
             String typesFiltered = ocsClient.Types.getTypes(tenantId, namespaceId, 0, 100, "contains(Id,'Target')");
@@ -368,7 +368,7 @@ public class Program {
             System.out.println("Filtered Types: " + typesFiltered);
 
             
-            // Step 15
+            // Step 16
             // tags and metadata
             System.out.println("Let's add some Tags and Metadata to our stream:");
             System.out.println();
@@ -406,7 +406,7 @@ public class Program {
 
             System.out.println();
 
-            // Step 16
+            // Step 17
             // delete data
 
             // remove the first value
@@ -422,7 +422,7 @@ public class Program {
             if (foundEvents.isEmpty())
                 System.out.println("All values deleted successfully!");
             
-            // Step 17
+            // Step 18
             System.out.println("Adding a stream with a secondary index.");
             SdsStreamIndex index  = new SdsStreamIndex();
             index.setSdsTypePropertyId("Radians");
@@ -476,7 +476,7 @@ public class Program {
 
             System.out.println("Secondary indexes on streams original:" + sampleStream.getIndexes().size() + ". New one:  " + numberOfIndicies);
 
-            // Step 18
+            // Step 19
             // Adding Compound Index Type
             System.out.println("Creating an SdsType with a compound index");
             SdsType typeCompound = getWaveCompoundDataType(compoundTypeId);
@@ -492,7 +492,7 @@ public class Program {
             streamCompound = ocsClient.mGson.fromJson(secondaryS, SdsStream.class);
 
             
-            // Step 19
+            // Step 20
 
             System.out.println("Inserting data");
             String dataIn = ocsClient.mGson.toJson(WaveDataCompound.next(1, 10));
@@ -519,7 +519,7 @@ public class Program {
             e.printStackTrace();
         } finally {
             try {
-                // Step 20
+                // Step 21
                 System.out.println("Cleaning up");
                 cleanUp(ocsClient);
                 System.out.println("done");
