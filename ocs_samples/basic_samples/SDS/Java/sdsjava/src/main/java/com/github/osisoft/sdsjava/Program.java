@@ -122,7 +122,7 @@ public class Program {
             // update the first value
             System.out.println("Updating events");
             List<WaveData> newEvent = new ArrayList<WaveData>();
-            evt = WaveData.next(1, 1.0, 0);
+            evt = WaveData.next(1, 4.0, 0);
             newEvent.add(evt);
             ocsClient.Streams.updateValues(tenantId, namespaceId, sampleStreamId, ocsClient.mGson.toJson(newEvent));
 
@@ -131,7 +131,7 @@ public class Program {
             for (int i = 2; i < 40; i += 2) // note: update will replace a value if it already exists, and create one if
                                             // it does not
             {
-                WaveData newEvt = WaveData.next(1, 1.0, i);
+                WaveData newEvt = WaveData.next(1, 4.0, i);
                 newEvents.add(newEvt);
                 Thread.sleep(10); // sleep for a bit because WaveData.radians is based on clock
             }
@@ -149,14 +149,14 @@ public class Program {
             // replace the first value
             System.out.println("Replacing events");
             newEvent = new ArrayList<WaveData>();
-            evt = WaveData.next(1, 0.5, 0);
+            evt = WaveData.next(1, 5.0, 0);
             newEvent.add(evt);
             ocsClient.Streams.replaceValues(tenantId, namespaceId, sampleStreamId, ocsClient.mGson.toJson(newEvent));
 
             // replace the remaining values
             newEvents = new ArrayList<WaveData>();
-            for (int i = 2; i < 20; i += 2) {
-                WaveData newEvt = WaveData.next(1, 0.5, i);
+            for (int i = 2; i < 40; i += 2) {
+                WaveData newEvt = WaveData.next(1, 5.0, i);
                 newEvents.add(newEvt);
                 Thread.sleep(10);
             }
@@ -186,8 +186,15 @@ public class Program {
             System.out.println("Total events found: " + foundEvents.size());
             dumpEvents(foundEvents);
             System.out.println();
-
             
+            //Step 11.1
+            //We will retrieve a sample of our data
+            System.out.println("SDS can return a sample of your data population to show trends.");
+            System.out.println("Getting Sampled Values:");
+            jsonMultipleValues = ocsClient.Streams.GetSampledValues(tenantId, namespaceId, sampleStream, "0", "40", 4, "Sin");
+            foundEvents = ocsClient.mGson.fromJson(jsonMultipleValues, listType);
+            dumpEvents(foundEvents);
+            System.out.println();
             // Step 11
             // Property Overrides
             System.out.println("Property Overrides");

@@ -48,10 +48,11 @@ public class WaveData {
     }
 
     public static WaveData next(int interval, double multiplier, int order) {
-        Calendar cal = new GregorianCalendar();
-        long milliSec = cal.getTimeInMillis() * 60;
-        int intervalInMilliSec = interval * 60 * 1000;
-        double radians = (((double) milliSec % intervalInMilliSec) / intervalInMilliSec) * 2 * Math.PI;
+        // Calendar cal = new GregorianCalendar();
+        // long milliSec = cal.getTimeInMillis() * 60;
+        // int intervalInMilliSec = interval * 60 * 1000;
+        //double radians = (((double) milliSec % intervalInMilliSec) / intervalInMilliSec) * 2 * Math.PI;
+        double radians = order * (Math.Pi / 32);
 
         return new WaveData(multiplier, radians, order);
     }
