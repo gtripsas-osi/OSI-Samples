@@ -70,8 +70,9 @@ To use Sds, you define SdsTypes that describe the kinds of data you want to stor
 SdsStreams. SdsTypes are the model that define SdsStreams.
 
 SdsTypes can define simple atomic types, such as integers, floats or strings, or they 
-can define complex types by grouping other SdsTypes. For more information about SdsTypes, 
-refer to the SDS Documentation.
+can define complex types by grouping other SdsTypes. For
+more information about SdsTypes, refer to the `Sds
+documentation <https://ocs-docs.osisoft.com/Documentation/SequentialDataStore/Data_Store_and_SDS.html>`__.
 
 To create an SdsType with a rest call:
 ```C#
