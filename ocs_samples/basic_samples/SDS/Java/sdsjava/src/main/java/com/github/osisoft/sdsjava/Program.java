@@ -359,17 +359,9 @@ public class Program {
 
             System.out.println("The new type id" + newStream.getTypeId() + " compared to the original one " + sampleStream.getTypeId());
             System.out.println("The new type value " + firstVal + " compared to the original one " + newStreamString);
+      
             
-            // Step 15 
-
-            String types = ocsClient.Types.getTypes(tenantId, namespaceId, 0, 100);
-            String typesFiltered = ocsClient.Types.getTypes(tenantId, namespaceId, 0, 100, "contains(Id,'Target')");
-            
-            System.out.println("All Types: " + types);
-            System.out.println("Filtered Types: " + typesFiltered);
-
-            
-            // Step 16
+            // Step 15
             // tags and metadata
             System.out.println("Let's add some Tags and Metadata to our stream:");
             System.out.println();
@@ -407,7 +399,7 @@ public class Program {
 
             System.out.println();
 
-            // Step 17
+            // Step 16
             // delete data
 
             // remove the first value
@@ -423,7 +415,7 @@ public class Program {
             if (foundEvents.isEmpty())
                 System.out.println("All values deleted successfully!");
             
-            // Step 18
+            // Step 17
             System.out.println("Adding a stream with a secondary index.");
             SdsStreamIndex index  = new SdsStreamIndex();
             index.setSdsTypePropertyId("Radians");
@@ -477,7 +469,7 @@ public class Program {
 
             System.out.println("Secondary indexes on streams original:" + sampleStream.getIndexes().size() + ". New one:  " + numberOfIndicies);
 
-            // Step 19
+            // Step 18
             // Adding Compound Index Type
             System.out.println("Creating an SdsType with a compound index");
             SdsType typeCompound = getWaveCompoundDataType(compoundTypeId);
@@ -493,7 +485,7 @@ public class Program {
             streamCompound = ocsClient.mGson.fromJson(secondaryS, SdsStream.class);
 
             
-            // Step 20
+            // Step 19
 
             System.out.println("Inserting data");
             String dataIn = ocsClient.mGson.toJson(WaveDataCompound.next(1, 10));
@@ -520,7 +512,7 @@ public class Program {
             e.printStackTrace();
         } finally {
             try {
-                // Step 21
+                // Step 20
                 System.out.println("Cleaning up");
                 cleanUp(ocsClient);
                 System.out.println("done");
