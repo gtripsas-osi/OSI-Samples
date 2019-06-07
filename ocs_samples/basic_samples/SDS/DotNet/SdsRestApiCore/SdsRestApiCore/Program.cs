@@ -276,7 +276,6 @@ namespace SdsRestApiCore
                 Console.WriteLine("SDS can return a sample of your data population to show trends.");
                 Console.WriteLine("Getting Sampled Values:");
                 response = await httpClient.GetAsync(
-                    requestUri:
                     $"api/{apiVersion}/Tenants/{tenantId}/Namespaces/{namespaceId}/Streams/{waveStream.Id}/Data/Sampled?startIndex={updateWaves[0].Order}&endIndex={updateWaves[updateWaves.Count-1].Order}&intervals={4}&sampleBy={nameof(WaveData.Sin)}");
                 var retrievedSamples =
                     JsonConvert.DeserializeObject<List<WaveData>>(await response.Content.ReadAsStringAsync());
